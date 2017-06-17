@@ -10,14 +10,22 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-def makeIndex(galleryDesc, destFileName):
+def makeIndex(galleryDesc, destFileName, staticAddressPrefix):
     indexTemplate = env.get_template('index.html')
     open(destFileName,'w').write(
-        indexTemplate.render(galleryDesc=galleryDesc, title=galleryDesc['title'])
+        indexTemplate.render(
+            galleryDesc=galleryDesc,
+            title=galleryDesc['title'],
+            staticAddressPrefix=staticAddressPrefix
+        )
     )
 
-def makeFotoPage(pageDesc, destFileName):
+def makeFotoPage(pageDesc, destFileName, staticAddressPrefix):
     pageTemplate = env.get_template('fotopage.html')
     open(destFileName,'w').write(
-        pageTemplate.render(pageDesc=pageDesc, title=pageDesc['title'])
+        pageTemplate.render(
+            pageDesc=pageDesc,
+            title=pageDesc['title'],
+            staticAddressPrefix=staticAddressPrefix
+        )
     )
