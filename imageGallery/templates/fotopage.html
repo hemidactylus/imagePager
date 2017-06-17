@@ -1,3 +1,52 @@
-fotopage.html
+{% extends "base.html" %}
 
-{{ pageDesc.filename }}
+{%block wrappedbody %}
+    <div class="container-fluid" style="padding-top: 5px; padding-bottom: 5px;">
+        <div id="wrapper">
+            <div class="jumbotron" style="padding-top: 5px; padding-bottom: 5px;">
+                <h3>
+                    Image {{ pageDesc.index }}
+                    <i>
+                        ({{ pageDesc.gallerytitle }})
+                    </i>
+                </h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{{ pageDesc.fotoname }}">
+                            {{ pageDesc.title }}
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        {% if pageDesc.prevlink %}
+                            <a href="{{ pageDesc.prevlink }}">
+                                <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-1">
+                        <a href="{{ pageDesc.indexlink }}">
+                            <i class="fa fa-arrow-up fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        {% if pageDesc.nextlink %}
+                            <a href="{{ pageDesc.nextlink }}">
+                                <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="jumbotron" style="padding-top: 5px; padding-bottom: 5px;">
+                    <!-- <div class="col-md-2"> -->
+                    <div align="center">
+                        <a href="{{ pageDesc.fotoname }}">
+                            <img width="70%" src="{{ pageDesc.fotoname }}">
+                        </a>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

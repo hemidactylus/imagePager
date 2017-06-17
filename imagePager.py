@@ -27,6 +27,7 @@ fDir='images'
 zipFileTitle='fotos.zip'
 indexFileTitle='index.html'
 pageTitleTemplate='foto_{n:04}.html'
+galleryTitle='GalleryTitle'
 
 def makePageTitle(pageTemplate, index, count):
     return pageTemplate.format(n=(((index-1)+count)%count)+1)
@@ -46,6 +47,7 @@ if __name__=='__main__':
     #
     galleryDesc={
         'nfotos': len(fileList),
+        'title': galleryTitle,
     }
     #
     if doZip:
@@ -63,14 +65,17 @@ if __name__=='__main__':
         # create copy and thumbnail
         tFotoTitle=os.path.join(tDir,'thumb_%s' % fotoName)
         fFotoTitle=os.path.join(fDir,fotoName)
-        copyFile(os.path.join(srcDir,fotoName),os.path.join(dstDir,tFotoTitle))
+        copyFile(os.path.join(srcDir,fotoName),os.path.join(dstDir,fDir))
         makeThumbnail(os.path.join(srcDir,fotoName),os.path.join(dstDir,tFotoTitle))
         # register it
         fotoItem={
+            'index': fotoIndex,
             'indexlink': indexFileTitle,
             'filename': fotoPageTitle,
             'fotoname': fFotoTitle,
             'thumbnail': tFotoTitle,
+            'title': fotoName,
+            'gallerytitle': galleryTitle,
         }
         if _fotoIndex>0:
             fotoItem['prevlink']=pageTitleMaker(fotoIndex-1)

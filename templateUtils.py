@@ -13,11 +13,11 @@ env = Environment(
 def makeIndex(galleryDesc, destFileName):
     indexTemplate = env.get_template('index.html')
     open(destFileName,'w').write(
-        indexTemplate.render(galleryDesc=galleryDesc)
+        indexTemplate.render(galleryDesc=galleryDesc, title=galleryDesc['title'])
     )
 
 def makeFotoPage(pageDesc, destFileName):
     pageTemplate = env.get_template('fotopage.html')
     open(destFileName,'w').write(
-        pageTemplate.render(pageDesc=pageDesc)
+        pageTemplate.render(pageDesc=pageDesc, title=pageDesc['title'])
     )

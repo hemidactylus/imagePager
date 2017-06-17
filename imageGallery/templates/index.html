@@ -1,3 +1,37 @@
-index.html
+{% extends "base.html" %}
 
-{{ galleryDesc.nfotos }}
+{%block wrappedbody %}
+    <div class="container-fluid" style="padding-top: 5px">
+        <div id="wrapper">
+            <div class="jumbotron" style="padding-top: 5px">
+                <h2>
+                    {{ galleryDesc.title }}
+                </h2>
+                <p>
+                    Click on the pictures to browse
+                    {% if galleryDesc.zipfile %}
+                        , or download the
+                        <a href="{{ galleryDesc.zipfile }}">
+                            full archive file
+                        </a>
+                    {% endif %}
+                    .
+                </p>
+                <hr>
+                <div class="row">
+                    <!-- <div class="col-md-2"> -->
+                    {% for fotoPage in galleryDesc.fotopages %}
+                        <a href="{{ fotoPage.filename }}">
+                            <img
+                                class="img-thumbnail img-fluid"
+                                src="{{ fotoPage.thumbnail }}"
+                                width=150px
+                            />
+                        </a>
+                    {% endfor %}
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

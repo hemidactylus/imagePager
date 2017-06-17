@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>
+                    {{ title }}
+        </title>
+        <!-- Bootstrap Core CSS -->
+        <link href="STATIC/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="STATIC/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="icon" href="STATIC/images/salamandrina.svg">
+    </head>
+    <body bgcolor="#a5edc2">
+        <div id="page-content-wrapper">
+            {% block wrappedbody %}
+            {% endblock %}
+            <nav class="navbar navbar-default navbar-fixed-bottom footer-colors" style="height: 80px;">
+                <div class="container" align="center" style="margin-top: 15px;">
+                    <small>
+                        <a href="/">
+                            <img src="STATIC/images/salamandrina.svg" alt="Logo" height=50px>
+                            Salamandrina
+                        </a>
+                    </small>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
