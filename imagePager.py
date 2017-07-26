@@ -16,6 +16,7 @@ from fileUtils import (
     ensureDirectoryExists,
     listImageFiles,
     copyFile,
+    normaliseRotation,
 )
 from templateUtils import (
     makeFotoPage,
@@ -39,6 +40,7 @@ if __name__=='__main__':
                 [-z [zipfilename]]
                 [-thumbdir thumbdir]
                 [-fotodir fotodir]
+                [-standalone, no reliance on anything else]
     '''
     args,opts = cmdLineParse(sys.argv[1:])
     doHelp=False
@@ -65,6 +67,10 @@ if __name__=='__main__':
                 abort=True
             else:
                 galleryTitle=opts['t'][0]
+            if 'standalone' in opts:
+                standalone=True
+            else:
+                standalone=False
             tDir=opts.get('thumbdir',['thumbs'])[0]
             fDir=opts.get('fotodir',['images'])[0]
             fDir=opts.get('fotodir',['images'])[0]
@@ -104,7 +110,8 @@ if __name__=='__main__':
             tFotoTitle=os.path.join(tDir,'thumb_%s' % fotoName)
             fFotoTitle=os.path.join(fDir,fotoName)
             copyFile(os.path.join(srcDir,fotoName),os.path.join(dstDir,fDir))
-            makeThumbnail(os.path.join(srcDir,fotoName),os.path.join(dstDir,tFotoTitle))
+            normaliseRotation(os.path.join(dstDir,fDir,fotoName))
+            makeThumbnail(os.path.join(dstDir,fDir,fotoName),os.path.join(dstDir,tFotoTitle))
             # register it
             fotoItem={
                 'index': fotoIndex,
@@ -121,7 +128,17 @@ if __name__=='__main__':
                 fotoItem['nextlink']=pageTitleMaker(fotoIndex+1)
             galleryDesc['fotopages'].append(fotoItem)
 
-        makeIndex(galleryDesc,os.path.join(dstDir,indexFileTitle),staticAddressPrefix=staticAddressPrefix)
+        makeIndex(
+            galleryDesc,
+            os.path.join(dstDir,indexFileTitle),
+            staticAddressPrefix=staticAddressPrefix,
+            standalone=standalone,
+        )
         for pageDesc in galleryDesc['fotopages']:
-            makeFotoPage(pageDesc, os.path.join(dstDir,pageDesc['filename']),staticAddressPrefix=staticAddressPrefix)
+            makeFotoPage(
+                pageDesc,
+                os.path.join(dstDir,pageDesc['filename']),
+                staticAddressPrefix=staticAddressPrefix,
+                standalone=standalone,
+            )
         print('done.')

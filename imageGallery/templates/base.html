@@ -10,9 +10,14 @@
                     {{ title }}
         </title>
         <!-- Bootstrap Core CSS -->
-        <link href="/static/salaWeb/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/static/salaWeb/font-awesome/css/font-awesome.min.css" type="text/css">
-        <link rel="icon" href="/static/salaWeb/images/salamandrina.svg">
+        {% if standalone %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        {% else %}
+            <link href="/static/salaWeb/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/static/salaWeb/font-awesome/css/font-awesome.min.css" type="text/css">
+            <link rel="icon" href="/static/salaWeb/images/salamandrina.svg">
+        {% endif %}
     </head>
     <body bgcolor="#a5edc2">
         <div id="page-content-wrapper">
@@ -22,7 +27,9 @@
                 <div class="container" align="center" style="margin-top: 15px;">
                     <small>
                         <a href="/">
-                            <img src="{{ staticAddressPrefix }}images/salamandrina.svg" alt="Logo" height=50px>
+                            {% if not standalone %}
+                                <img src="{{ staticAddressPrefix }}images/salamandrina.svg" alt="Logo" height=50px>
+                            {% endif %}
                             Salamandrina
                         </a>
                     </small>

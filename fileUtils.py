@@ -20,7 +20,20 @@ def makeThumbnail(src,dst):
             dst,
         ]
     )
-    
+
+def normaliseRotation(imgName):
+    '''
+        uses 'mogrify' with the -auto-orient flag to shift
+        all rotations from the exif data to the image file
+    '''
+    subprocess.check_output(
+        [
+            'mogrify',
+            '-auto-orient',
+            imgName,
+        ]
+    )    
+
 def createZip(srcFiles,dstZip):
     cmdList=['zip',dstZip]+srcFiles
     subprocess.check_output(cmdList)
