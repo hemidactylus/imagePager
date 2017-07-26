@@ -1,0 +1,5 @@
+README:
+
+    imagePager.py : a utility to generate a static image gallery
+    with zipfile and thumbnail view,
+    thought to fit in the salaWeb ecosystem.
