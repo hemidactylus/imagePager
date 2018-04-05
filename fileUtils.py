@@ -50,3 +50,32 @@ def ensureDirectoryExists(dirName):
 
 def copyFile(src,dst):
     shutil.copy(src,dst)
+
+def getFilesAndDirs(dirName,blackList=[]):
+    '''
+        returns a list of {
+            'filename': 'aaa.txt',
+            'isdir': True/False,
+            'size': 123, # KB (None for dirs)
+        } items, sorted with dirs first and then
+        alphabetically (case insensitive)
+    '''
+    names=[]
+    for fName in os.listdir(dirName):
+        if fName not in blackList:
+            tItem={
+                'filename': fName
+            }
+            fullName=os.path.join(dirName,fName)
+            if os.path.isfile(fullName):
+                tItem['isdir']=False
+                tItem['size']=int(os.path.getsize(fullName)/1024)
+                names.append(tItem)
+            elif os.path.isdir(fullName):
+                tItem['isdir']=True
+                tItem['size']=None
+                names.append(tItem)
+    return sorted(
+        names,
+        key=lambda itm: (0 if itm['isdir'] else 1, itm['filename'].lower()),
+    )

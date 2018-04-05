@@ -22,12 +22,22 @@ def makeIndex(galleryDesc, destFileName, staticAddressPrefix,standalone=False):
     )
 
 def makeFotoPage(pageDesc, destFileName, staticAddressPrefix,standalone=False):
-    prefix='standalone_' if standalone else ''
     pageTemplate = env.get_template('fotopage.html')
     open(destFileName,'w').write(
         pageTemplate.render(
             pageDesc=pageDesc,
             title=pageDesc['title'],
+            staticAddressPrefix=staticAddressPrefix,
+            standalone=standalone
+        )
+    )
+
+def makeFileIndex(fileDesc,destFileName,staticAddressPrefix,standalone=False):
+    pageTemplate = env.get_template('fileindex.html')
+    open(destFileName,'w').write(
+        pageTemplate.render(
+            fileDesc=fileDesc,
+            title=fileDesc['title'],
             staticAddressPrefix=staticAddressPrefix,
             standalone=standalone
         )

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{%block wrappedbody %}
+    <div class="container-fluid" style="padding-top: 5px">
+        <div id="wrapper">
+            <div class="jumbotron" style="padding-top: 5px">
+                <h2>
+                    {% if fileDesc.title %}
+                        Directory listing for {{ fileDesc.title }}
+                    {% else %}
+                        Directory listing
+                    {% endif %}
+                </h2>
+                {% if fileDesc.text %}
+                    <p>
+                        {{ fileDesc.text }}
+                    </p>
+                {% endif %}
+                <hr>
+                {% for fileItem in fileDesc.fileItems %}
+                    <div class="row">
+                        <a href="{{ fileItem.filename }}">
+                            {% if fileItem.isdir %}
+                                (dir)
+                            {% endif %}
+                            {{ fileItem.filename }}
+                            {% if not fileItem.isdir %}
+                                [{{ fileItem.size }} KB]
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
