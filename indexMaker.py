@@ -78,7 +78,7 @@ if __name__=='__main__':
         fileDesc={
             'fileItems': fileItems,
             'title': theDir,
-            'text': None,
+            'text': subTitleText,
         }
         makeFileIndex(
             fileDesc,
